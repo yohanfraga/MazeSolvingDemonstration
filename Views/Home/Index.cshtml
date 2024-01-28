@@ -1,0 +1,295 @@
+﻿@model MazeSolvingDemonstration.Models.CellGrid
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<head>
+    <meta charset="utf-8" />
+    <title>Demonstração de Algoritmos de Busca em Labirintos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="homepage" asp-area="" asp-controller="Home" asp-action="Index">Demonstração de Algoritmos de Busca em Labirintos</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li><div style="background-color: #2F2C9B;"></div></li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="lista" id="lista" onclick="showList()">
+                                    Algoritimos<span class="caret"></span>
+                                </button>
+                                <div id="minhaLista" class="conteudoLista">
+                                    <div clickable="true" onclick="setValue(event)" class="opc" id="bfs">Busca em Largura(BFS)</div>
+                                    <div clickable="true" onclick="setValue(event)" class="opc" id="dfs">Busca em Profundidade(DFS)</div>
+                                    <!--<div clickable="true" onclick="setValue(event)" class="opc" id="gfs">Greedy Best-First Search</div>-->
+                                    <!---<div clickable="true" onclick="setValue(event)" class="opc" id="djk">Algoritmo de Dijkstra</div>-->
+                                    <div clickable="true" onclick="setValue(event)" class="opc" id="a**">Algoritmo A* (A estrela)</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="listaGerador" id="listaGerador" onclick="showListGerador()">
+                                    Gerar Labirintos<span class="caret"></span>
+                                </button>
+                                <div id="minhaListaGerador" class="conteudoListaGerador">
+                                    <div clickable="true" onclick="setValue(event)" class="opc" id="constructDFS">Aleatório com Busca em Profundidade</div>
+                                    <div clickable="true" onclick="setValue(event)" class="opc" id="rec">Divisão Recursiva</div>
+                                    <div clickable="true" onclick="setValue(event)" class="opc" id="fib">Espiral</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="listaVelocidade" id="listaVelocidade" onclick="showListVelocidade()">
+                                    1x
+                                </button>
+                                <div id="minhaListaVelocidade" class="conteudoListaVelocidade">
+                                    <div clickable="true" onclick="setVelocidade(event)" class="opc" id="1x">Velocidade 1x</div>
+                                    <div clickable="true" onclick="setVelocidade(event)" class="opc" id="2x">Velocidade 2x</div>
+                                    <div clickable="true" onclick="setVelocidade(event)" class="opc" id="3x">Velocidade 3x</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <button class="botaolimpa" id="limparLabirinto">Limpar Labirinto</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="botaolimpaparede" id="limparparede">Limpar Paredes</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="botaolimparesultado" id="limparresultado">Limpar Resultado</button>
+                        </li>
+                        <li class="nav-item">
+                            @using (Html.BeginForm()) {
+                                @Html.HiddenFor(m => m.xs)
+                                @Html.HiddenFor(m => m.ys)
+                                @Html.HiddenFor(m => m.classes)
+                                @Html.HiddenFor(m => m.method)
+                                @Html.HiddenFor(m => m.vel)
+                                <button class="botaoiniciar" id="iniciarBusca" type="submit">Escolha um Algoritmo!</button>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="legenda">
+        <ul>
+            <li style="width: 110px;">
+                <table><tr><td class="inicio"></td><td class="texto">Começo</td></tr></table>
+            </li>
+            <li style ="width: 100px;">
+                <table><tr><td class="fim"></td><td class="texto">Final</td></tr></table>
+            </li>
+            <li style ="width: 150px;">
+                <table><tr><td class="caminho"></td><td class="texto">Não</td><td class="texto">Visitada</td></tr></table>
+            </li>
+            <li style="width: 120px;">
+                <table><tr><td class="visitada"></td><td class="texto">Visitada</td></tr></table>
+            </li>
+            <li style ="width: 120px;">
+                <table><tr><td class="path"></td><td class="texto">Caminho</td></tr></table>
+            </li>
+            <li style="width: 120px;">
+                <table><tr><td class="parede"></td><td class="texto">Parede</td></tr></table>
+            </li>
+        </ul>
+    </div>
+    <div id="labirinto">
+        <table>
+            <tbody>
+                @for(int i = 0; i<31; i++){
+                    <tr>                   
+                    @for (int j = 0; j < 74; j++) {
+                            <td class="caminho" draggablew = "true" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                    }
+                    </tr>
+                }
+            </tbody>        </table>
+    </div>
+    <div id="resultado">
+            
+    </div>
+</body>
+
+@section scripts {
+    <script>
+        var classSteps = "@Model?.classes"
+        var firstgrid = "@Model?.ys"
+        var indexChanges = "@Model?.xs"
+        var stepnumbers = parseInt("@Model?.stepstoResult")
+        var velo = parseInt("@Model?.vel")
+        var showing = false
+        var dragging = false
+        var method = "@Model?.method"
+        var saveClass
+
+        switch (velo) {
+            case 1:
+                document.getElementById("listaVelocidade").textContent = "1x";
+                break;
+            case 2:
+                document.getElementById("listaVelocidade").textContent = "2x";
+                break
+            case 3:
+                document.getElementById("listaVelocidade").textContent = "3x";
+                break;
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            if (!showing) {
+                dragging = true
+                showing = true
+                ev.dataTransfer.setData("text", ev.target.id);
+                ev.dataTransfer.effectAllowed = "copy";
+            }
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            var original = document.getElementById(data);
+            if (original != null) {
+                if (original.classList.contains("inicio")) {
+                    original.classList.remove("inicio");
+                    ev.target.classList.add("inicio")
+                    ev.target.setAttribute("id", "inicio")
+                }
+                else if (original.classList.contains("fim")) {
+                    original.classList.remove("fim");
+                    ev.target.classList.add("fim")
+                    ev.target.setAttribute("id", "fim")
+                }
+                original.classList.add("caminho");
+                original.setAttribute("ondragstart", "");
+                original.setAttribute("id", "");
+                original.setAttribute("ondrop", "drop(event)")
+                original.setAttribute("draggable", "false")
+                ev.target.setAttribute("ondragstart", "drag(event)");
+                ev.target.classList.remove("parede")
+                ev.target.classList.remove("caminho")
+                ev.target.classList.remove("path")
+                ev.target.classList.remove("visitada")
+                ev.target.setAttribute("ondrop", "")
+                ev.target.setAttribute("draggable", "true")
+                
+            }
+            if (dragging) {
+                showing = false
+                dragging = false
+            }
+        }
+
+        function setValue(ev) {        
+            document.getElementById("iniciarBusca").disabled = false
+            method = ev.target.id
+            switch (method) { 
+                case 'bfs':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar Busca em Largura!";
+                    break;
+                case 'dfs':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar Busca em Profundidade!";
+                    break;
+                case 'gfs':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar com Greedy Best-First Search!";
+                    break;
+                case 'djk':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar Busca com Dijkstra!";
+                    break;
+                case 'a**':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar Busca com o Algoritmo A*!";
+                    break;
+                case 'constructDFS':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar Geração!";
+                    break;
+                case 'fib':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar Geração!";
+                    break
+                case 'rec':
+                    document.getElementById("iniciarBusca").textContent = "Iniciar Geração!";
+                    break;
+            }
+        }
+
+        function setVelocidade(ev) {
+            switch (ev.target.id) {
+                case '1x':
+                    document.getElementById("listaVelocidade").textContent = "1x";
+                    document.getElementById("vel").value = 1
+                    break;
+                case '2x':
+                    document.getElementById("listaVelocidade").textContent = "2x";
+                    document.getElementById("vel").value = 2
+                    break;
+                case '3x':
+                    document.getElementById("listaVelocidade").textContent = "3x";
+                    document.getElementById("vel").value = 3
+                    break;
+            }
+        }
+
+        function showList() {
+            document.getElementById("minhaLista").classList.remove("conteudoLista");
+            document.getElementById("minhaLista").classList.add("show");
+        }
+        function showListGerador() {
+            document.getElementById("minhaListaGerador").classList.remove("conteudoListaGerador");
+            document.getElementById("minhaListaGerador").classList.add("showGerador");
+        }
+        function showListVelocidade() {
+            document.getElementById("minhaListaVelocidade").classList.remove("conteudoListaVelocidade");
+            document.getElementById("minhaListaVelocidade").classList.add("showVelocidade");
+        }
+
+        window.onclick = function (event) {
+            if (!event.target.matches('.listaclicada')) {
+                var conteudo = document.getElementById("minhaLista");
+                var i;
+                if (conteudo.classList.contains('show')) {
+                    conteudo.classList.add("conteudoLista");
+                    conteudo.classList.remove('show');
+                }
+                var botao = document.getElementById("lista")
+                botao.classList.remove("listaclicada")
+                botao.classList.add("lista")
+            }
+            if (!event.target.matches('.geradorclicado')) {
+                var conteudo = document.getElementById("minhaListaGerador");
+                var i;
+                if (conteudo.classList.contains("showGerador")) {
+                    conteudo.classList.add("conteudoListaGerador");
+                    conteudo.classList.remove("showGerador");
+                }
+                var botao = document.getElementById("listaGerador")
+                botao.classList.remove("geradorclicado")
+                botao.classList.add("listaGerador")
+            }
+            if (!event.target.matches('.velocidadeclicada')) {
+                var conteudo = document.getElementById("minhaListaVelocidade");
+                var i;
+                if (conteudo.classList.contains("showVelocidade")) {
+                    conteudo.classList.add("conteudoListaVelocidade");
+                    conteudo.classList.remove("showVelocidade");
+                }
+                var botao = document.getElementById("listaVelocidade")
+                botao.classList.remove("velocidadeclicada")
+                botao.classList.add("listaVelocidade")
+            }
+        }
+    </script>
+}

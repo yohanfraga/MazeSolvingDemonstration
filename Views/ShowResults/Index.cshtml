@@ -1,0 +1,173 @@
+﻿
+
+<head>
+    <meta charset="utf-8" />
+    <title>Demonstração de Algoritmos de Busca em Labirintos</title>
+</head>
+<head>
+    <meta charset="utf-8" />
+    <title>Demonstração de Algoritmos de Busca em Labirintos</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Demonstração de Algoritmos de Busca em Labirintos</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <button class="botoes" id="definirDestino">Reiniciar</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="labirinto">
+        <table>
+            <tbody>
+                @for (int i = 0; i < 21; i++) {
+                    <tr>
+                        @for (int j = 0; j < 47; j++) {
+                            <td class="caminho"></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="resultado">
+    </div>
+</body>
+
+
+<style>
+    /* Estilos para a tabela e c�lulas */
+    #labirinto table {
+        border-collapse: collapse;
+    }
+
+    #labirinto td {
+    }
+
+    .botaoiniciar {
+        width: 115px;
+        height: 40px;
+        background: url("images/iniciarbusca.png") center;
+        border-color: transparent;
+    }
+
+    .escolha {
+        border-color: transparent;
+    }
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+    /* Estilos para paredes e caminhos */
+    .parede {
+        width: 40px;
+        height: 40px;
+        background: url("images/parede.png") center
+    }
+
+    .caminho {
+        width: 40px;
+        height: 40px;
+        background: url("images/caminho.png") center
+    }
+
+    .inicio {
+        background-color: #00cc00;
+        width: 40px;
+        height: 40px;
+    }
+
+    .parede {
+        width: 20px;
+        height: 20px;
+        background-color: #014D45;
+        border: 1px solid #014D45;
+        /*background: url("images/parede.png") center*/
+    }
+
+    .parede {
+        width: 20px;
+        height: 20px;
+        background-color: #014D45;
+        background-position: center;
+        border: 1px solid #014D45;
+    }
+
+    .caminho {
+        width: 20px;
+        height: 20px;
+        background: white;
+        background-position: center;
+        border: 1px solid rgba(1, 77, 69, .4);
+    }
+
+    .inicio {
+        background-color: #00cc00;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+        border: 1px solid rgba(1, 77, 69, .4);
+    }
+
+    .fim {
+        background-color: #ff0000;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+        border: 1px solid rgba(1, 77, 69, .4);
+    }
+
+    .visitada {
+        background-color: yellow;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+        border: 1px solid white;
+    }
+
+    .path {
+        background-color: orange;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+        border: 1px solid white;
+    }
+</style>
+
+@section scripts {
+    <script>
+        var i = 0, stepnumbers = 
+        var classes = classSteps.split(',')
+        var sleepSetTimeout_ctrl;
+
+        function sleep(ms) {
+            return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            for (var j = 0; j < stepnumbers-1; j = j + 1) {
+                sleep(j*100).then(() => {
+                    var cells = document.querySelectorAll("#labirinto td");
+                    cells.forEach(function (cell) {
+                        cell.className = classes[i]
+                        i = i + 1
+                    });
+                });
+            }
+        });
+    </script>
+  
+}
+

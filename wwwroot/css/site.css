@@ -1,0 +1,398 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+}
+
+
+@keyframes grow {
+    0% {
+        transform: scale(.1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes growvisitada {
+    0% {
+        transform: scale(.3);
+        background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 100%;
+    }
+
+    50% {
+        background-color: rgba(17, 104, 217, 0.75);
+        border: 1px solid rgb(175, 216, 248);
+    }
+
+    75% {
+        transform: scale(1.2);
+        background-color: rgba(0, 217, 159, 0.75);
+    }
+
+    100% {
+        transform: scale(1.0);
+        background-color: rgba(0, 190, 218, 0.75);
+        border: 1px solid white;
+    }
+}
+
+@keyframes growpath {
+
+    from {
+        background-color: #00D6FF;
+    }
+
+    to {
+        background-color: #DFDC0A;
+    }
+}
+/* Estilos para a tabela e c�lulas */
+#labirinto table {
+    border-collapse: collapse;
+    margin-left: 14px;
+}
+
+#labirinto td {
+    width: 25px;
+    height: 25px;
+    
+}
+
+#legenda ul li {
+    display: inline-block;
+    list-style: none;
+    padding: 0 28px 0 0;
+    font-family: 'Bree Serif', serif;
+    color: #2F2C9B;
+}
+#legenda td {
+    width: 25px;
+    height: 25px;
+}
+.texto {
+    width: 15%;
+    float: left;
+    margin-left: 10px
+}
+
+button.lista:hover, button.botaolimpa:hover, button.botaolimpaparede:hover, button.botaolimparesultado:hover, button.botaosetalabirinto:hover, button.listaVelocidade:hover, button.listaGerador:hover {
+    color: #9D9BEB;
+}
+
+.homepage {
+    position: center;
+    width: 470px;
+    height: 40px;
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    text-decoration: none;
+    margin-top: auto;
+}
+.show {
+    display: block;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    min-width: 210px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown {
+    margin-left: 10px;
+    position: relative;
+    display: inline-block;
+}
+.conteudoLista {
+    display: none;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    min-width: 210px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.conteudoListaGerador {
+    display: none;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    min-width: 210px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.showGerador {
+    display: block;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    min-width: 210px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.opc {
+    font-size: 16px;
+    font-family: 'Bree Serif', serif;
+    color: #2F2C9B;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+div.opc:hover {
+    background-color: #2F2C9B;
+    color: white;
+}
+.lista {
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+}
+.listaclicada {
+    color: white;
+    font-family: 'Bree Serif', serif;
+    background-color: #2F2C9B;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+.listaGerador {
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+}
+
+.geradorclicado {
+    color: white;
+    font-family: 'Bree Serif', serif;
+    background-color: #2F2C9B;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+.listaVelocidade {
+    color: #2F2C9B;
+    width: 60px;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+}
+
+.velocidadeclicada {
+    color: white;
+    width: 60px;
+    font-family: 'Bree Serif', serif;
+    background-color: #2F2C9B;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+.conteudoListaVelocidade {
+    display: none;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    min-width: 210px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.showVelocidade {
+    display: block;
+    border-radius: 10px;
+    position: absolute;
+    background-color: white;
+    min-width: 210px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 7px;
+    vertical-align: middle;
+    border-top: 5px dashed;
+    border-top: 5px solid\9;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+
+.botaoiniciar {
+    color: white;
+    margin-left: 15px;
+    font-family: 'Bree Serif', serif;
+    background-color: #2F2C9B;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+.botaoiniciarespera {
+    color: white;
+    margin-left: 15px;
+    font-family: 'Bree Serif', serif;
+    background-color: #D14C4C;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+.navegacao {
+    margin-left: 10px
+}
+.botaolimpa {
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+}
+
+.botaolimpaparede {
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+}
+.botaolimparesultado {
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+}
+
+.botaosetalabirinto {
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 10px 15px;
+}
+
+.escolha {
+    border-color: transparent;
+    color: #2F2C9B;
+    font-family: 'Bree Serif', serif;
+    margin-top: 10px;
+}
+/* Estilos para paredes e caminhos */
+.parede {
+    background-color: #083C46;
+    background-repeat: no-repeat;
+    animation-name: grow;
+    animation-duration: 0.3s;
+}
+
+.caminho {
+    width: 25px;
+    height: 25px;
+    background: white;
+    background-position: center;
+    border: 1px solid rgb(175, 216, 248);
+}
+
+.inicio {
+    background-color: #00B000;
+    background-position: center;
+    animation-name: grow;
+    animation-duration: 0.3s;
+}
+
+.fim {
+    background-color: #C60000;
+    background-position: center;
+    animation-name: grow;
+    animation-duration: 0.3s;
+}
+
+.visitada {
+    background-color: #00D6FF;
+    background-position: center;
+    border: 1px solid white;
+    animation-name: growvisitada;
+    animation-duration: 1s;
+}
+
+.path {
+    background-color: #DFDC0A;
+    background-position: center;
+    animation-name: growpath;
+    animation-duration: 0.3s;
+    border: 1px solid white;
+}
+
+.atual {
+    background-color: mediumpurple;
+    background-position: center;
+    border: 1px solid rgb(175, 216, 248);
+}
